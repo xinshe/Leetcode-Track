@@ -26,13 +26,16 @@ package h4_MedianofTwoSortedArrays;
 
 public class MedianofTwoSortedArrays {
 
-	// 参考：https://leetcode-cn.com/problems/median-of-two-sorted-arrays/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-w-2/
+	/**
+	 * 解法1：
+	 * 参考：https://leetcode-cn.com/problems/median-of-two-sorted-arrays/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-w-2/
+	 */
 	public double findMedianSortedArrays(int[] nums1, int[] nums2) {
 		int len1 = nums1.length;
 		int len2 = nums2.length;
 
 		int left = (len1 + len2 + 1) / 2;
-		int right = (len1 +len2 + 2) / 2;
+		int right = (len1 + len2 + 2) / 2;
 		return (findKMin(nums1, 0, len1 - 1, len1, nums2, 0, len2 - 1, len2, left)
 				+ findKMin(nums1, 0, len1 - 1, len1, nums2, 0, len2 - 1, len2, right)) * 0.5;
 
@@ -63,15 +66,18 @@ public class MedianofTwoSortedArrays {
 		}
 	}
 
-	// 时间复杂度 O(m + n)
-	public static double findMedianSortedArrays02(int[] nums1, int[] nums2) {
+	/**
+	 * 解法2
+	 * 时间复杂度 O(m + n)
+	 */
+	public double findMedianSortedArrays02(int[] nums1, int[] nums2) {
 		int m = nums1.length;
 		int n = nums2.length;
 
 		int pm = 0;
 		int pn = 0;
 
-		double[] res = new double[m+n];
+		double[] res = new double[m + n];
 		int index = 0;
 		while(pm < m && pn < n) {
 			if(nums1[pm] <= nums2[pn])
@@ -86,10 +92,10 @@ public class MedianofTwoSortedArrays {
 			res[index++] = nums2[pn++];
 		}
 		
-		if((m+n)%2 == 0) {
-			return (res[(m+n)/2]+res[(m+n)/2-1])/2;
+		if((m + n) % 2 == 0) {
+			return (res[(m + n) / 2] + res[(m + n ) / 2 - 1]) / 2;
 		} else {
-			return res[(m+n)/2];
+			return res[(m + n) / 2];
 		}
     }
 

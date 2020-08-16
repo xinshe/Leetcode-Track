@@ -14,7 +14,7 @@ import java.util.List;
  * 输入: nums = [1,2,3]
  * 输出:
  * [
- *   [3],
+ *    [3],
  *   [1],
  *   [2],
  *   [1,2,3],
@@ -23,6 +23,8 @@ import java.util.List;
  *   [1,2],
  *   []
  * ]
+ *
+ * 题目链接：https://leetcode-cn.com/problems/subsets/
  */
 
 public class Subsets {
@@ -30,15 +32,15 @@ public class Subsets {
     /**
      * 解法1：回溯法
      */
-    static List<List<Integer>> res = new ArrayList<>();
+    List<List<Integer>> res = new ArrayList<>();
 
-    public static List<List<Integer>> subsets(int[] nums) {
+    public List<List<Integer>> subsets(int[] nums) {
         List<Integer> track = new ArrayList<>();
         backtrack(0, nums, track);
         return res;
     }
 
-    private static void backtrack(int start, int[] nums, List<Integer> track) {
+    private void backtrack(int start, int[] nums, List<Integer> track) {
         res.add(new ArrayList<>(track));
         for (int i = start; i < nums.length; i++) {
             track.add(nums[i]);
@@ -49,9 +51,9 @@ public class Subsets {
 
     public static void main(String[] args) {
         int[] nums = new int[]{1,2,3};
-        subsets(nums);
-        for (int i = 0; i < res.size(); i++) {
-            System.out.println(res.get(i).toString());
+        List<List<Integer>> r = new Subsets().subsets(nums);
+        for (int i = 0; i < r.size(); i++) {
+            System.out.println(r.get(i).toString());
         }
     }
 }

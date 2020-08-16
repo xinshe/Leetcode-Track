@@ -3,6 +3,8 @@ package e20_ValidParentheses;
 import java.util.Stack;
 
 /**
+ * 20. 有效的括号
+ *
  * 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
  *
  * 有效字符串需满足：
@@ -29,6 +31,8 @@ import java.util.Stack;
  * 示例 5:
  * 输入: "{[]}"
  * 输出: true
+ *
+ * 题目链接：https://leetcode-cn.com/problems/valid-parentheses/
  *
  */
 

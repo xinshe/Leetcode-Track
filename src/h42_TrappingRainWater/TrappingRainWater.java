@@ -3,6 +3,8 @@ package h42_TrappingRainWater;
 import java.util.Stack;
 
 /**
+ * 42. 接雨水
+ *
  * Given n non-negative integers representing an elevation map where the width of each bar is 1,
  * compute how much water it is able to trap after raining.
  * 给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
@@ -11,6 +13,7 @@ import java.util.Stack;
  * Input: [0,1,0,2,1,0,1,3,2,1,2,1]
  * Output: 6
  *
+ * 题目链接：https://leetcode-cn.com/problems/trapping-rain-water/
  * 参考视频：https://www.bilibili.com/video/av60668163/?p=1
  */
 
@@ -62,10 +65,10 @@ public class TrappingRainWater {
     public int trap02(int[] height) {
         int len;
         if (height == null || (len = height.length) <= 2) return 0;
-        int left = 0;
-        int right = len - 1;
-        int leftMax = 0;
-        int rightMax = len - 1;
+        int left = 0;   // 当前值
+        int right = len - 1;    // 当前值
+        int leftMax = 0;    // 当前左边柱子高度的最大值的索引位置
+        int rightMax = len - 1;     // 当前右边柱子高度的最大值的索引位置
         int res = 0;
         while (left < right) {
             // 对于某个位置i能积多少水，取决于它的左右两边的柱子高度的最大值的较小的那个，所以当height[left] < height[right]时，就对左边进行操作

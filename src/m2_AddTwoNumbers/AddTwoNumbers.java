@@ -22,8 +22,7 @@ import helper.ListNode;
 public class AddTwoNumbers {
 
 	/**
-	 * 自己的解法：
-	 * 这个解法是自己第一下想到的，刚开始做的是将每个链表转换成对应的整数，然后把这两个整数相加得到和，再将和转换成链表。这个解法在这道题目里面肯定是
+	 * 刚开始做的是将每个链表转换成对应的整数，然后把这两个整数相加得到和，再将和转换成链表。这个解法在这道题目里面肯定是
 	 * 行不通的，因为链表的长度未知，可能会很长，超出基本数据类型所能保存的最大数据范围。
 	 * 所以就想到了下面这种解法，因为链表中的数的顺序与实际数的顺序是相反的，即链表中个位数在前面，高位数在链表后面。所以很自然的一个思路就是从链表头
 	 * 部开始遍历链表，依次对两个链表的每一位相加，将得到的结果的个位数保存在结果链表中，若结果大于9就进1，参与到下一位的加法当中。
@@ -39,13 +38,7 @@ public class AddTwoNumbers {
 	 * 3、简化代码
 	 * 
 	 */
-	public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-		if (l1 == null || (l1.next == null && l1.val == 0)) {
-			return l2;
-		}
-		if (l2 == null || (l2.next == null && l2.val == 0)) {
-			return l1;
-		}
+	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 		ListNode head = new ListNode(0);
 		ListNode p = head;
 		ListNode p1 = l1;
@@ -79,8 +72,8 @@ public class AddTwoNumbers {
 		return head.next;
 	}
 
-	// 上面的代码太长，可做一下简化
-	public static ListNode addTwoNumbers02(ListNode l1, ListNode l2) {
+	// 上面的代码太长，可做一下简化（推荐）
+	public ListNode addTwoNumbers02(ListNode l1, ListNode l2) {
 		if (l1 == null || (l1.next == null && l1.val == 0)) {
 			return l2;
 		}
@@ -108,16 +101,4 @@ public class AddTwoNumbers {
 		return head.next;
 	}
 
-	public static void main(String[] args) {
-		ListNode l1 = new ListNode(9);
-		l1.next = new ListNode(8);
-
-		ListNode l2 = new ListNode(1);
-
-		ListNode res = addTwoNumbers(l1,l2);
-		while(res != null) {
-			System.out.println(res.val);
-			res = res.next;
-		}
-	}
 }

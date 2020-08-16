@@ -24,10 +24,10 @@ public class PermutationsII {
 
     // 参考：https://leetcode-cn.com/problems/permutations-ii/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liwe-2/
     // 在 LeetCode上提交时，去掉静态信息
-    static List<List<Integer>> res = new ArrayList<>();
-    static boolean[] used;
+    List<List<Integer>> res = new ArrayList<>();
+    boolean[] used;
 
-    public static List<List<Integer>> permuteUnique(int[] nums) {
+    public List<List<Integer>> permuteUnique(int[] nums) {
         List<Integer> track = new ArrayList<>();
         used = new boolean[nums.length];
         // 排序（升序或者降序都可以），为了剪枝方便
@@ -36,7 +36,7 @@ public class PermutationsII {
         return res;
     }
 
-    private static void backtrack(int[] nums, List<Integer> track) {
+    private void backtrack(int[] nums, List<Integer> track) {
         if (track.size() == nums.length) {
             res.add(new ArrayList<>(track));
             return;
@@ -55,11 +55,4 @@ public class PermutationsII {
         }
     }
 
-    public static void main(String[] args) {
-        int[] nums = new int[]{1};
-        List<List<Integer>> res = permuteUnique(nums);
-        for (List<Integer> item : res) {
-            System.out.println(item.toString());
-        }
-    }
 }

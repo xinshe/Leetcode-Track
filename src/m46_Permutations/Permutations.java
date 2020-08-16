@@ -25,11 +25,11 @@ import java.util.List;
 
 public class Permutations {
 
+    List<List<Integer>> res = new ArrayList<>();
+
     /**
      * 第一种实现
      */
-    List<List<Integer>> res = new ArrayList<>();
-
     public List<List<Integer>> permute(int[] nums) {
         List<Integer> track = new ArrayList<>();
         backtrack(nums, track);
@@ -61,15 +61,13 @@ public class Permutations {
      * 第二种实现
      */
     public List<List<Integer>> permute02(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
         if (nums == null || nums.length == 0) return res;
-        List<Integer> track = new ArrayList<>();
         boolean[] visited = new boolean[nums.length];
-        backtrack(track, visited, res, nums);
+        backtrack(new ArrayList<>(), visited, nums);
         return res;
     }
 
-    private void backtrack(List<Integer> track, boolean[] visited, List<List<Integer>> res, int[] nums) {
+    private void backtrack(List<Integer> track, boolean[] visited, int[] nums) {
         if (track.size() == nums.length) {
             res.add(new ArrayList<>(track));
             return;
@@ -77,10 +75,9 @@ public class Permutations {
 
         for (int i = 0; i < nums.length; i++) {
             if (visited[i]) continue;
-
             track.add(nums[i]);
             visited[i] = true;
-            backtrack(track, visited, res, nums);
+            backtrack(track, visited, nums);
             track.remove(track.size() - 1);
             visited[i] = false;
         }

@@ -23,6 +23,7 @@ import java.util.Arrays;
  *      输出: 4
  *      解释: 你可以分别给这三个孩子分发 1、2、1 颗糖果。第三个孩子只得到 1 颗糖果，这已满足上述两个条件。
  *
+ * 题目链接：https://leetcode-cn.com/problems/candy/
  * 参考：
  * https://leetcode-cn.com/problems/candy/solution/fen-fa-tang-guo-by-leetcode/
  */
@@ -117,7 +118,7 @@ public class Candy {
     }
 
     /**
-     * 解法3：用一个数组
+     * 解法3：用一个数组（推荐）
      *
      * 复杂度分析：
      *      时间复杂度：O(n)。长度为 n 数组 candies 被遍历了 2 次。

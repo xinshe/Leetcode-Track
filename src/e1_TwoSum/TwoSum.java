@@ -15,12 +15,12 @@ import java.util.Map;
  * 		因为 nums[0] + nums[1] = 2 + 7 = 9
  * 		所以返回 [0, 1]
  *
- * https://leetcode-cn.com/problems/two-sum/
+ * 题目链接：https://leetcode-cn.com/problems/two-sum/
  */
 
 public class TwoSum {
 
-	// 注意此题不能用双指针或者二分查找，因为数组排序后索引位置就变动了
+	// 注意此题中的数组不能排序，即不能用双指针或者二分查找，因为数组排序后索引位置就变动了
 
 	/**
 	 * 方法1：暴力解法
@@ -28,7 +28,10 @@ public class TwoSum {
 	 * 时间复杂度：O(N^2)
 	 * 空间复杂度：O(1)
 	 */
-	public static int[] twoSum1(int[] nums, int target) {
+	public int[] twoSum1(int[] nums, int target) {
+		if (nums == null || nums.length == 0) {
+			return null;
+		}
 		int len = nums.length;
 		for(int i = 0; i < len; i++) {
 			for(int j = i + 1; j < len; j++) {
@@ -45,7 +48,10 @@ public class TwoSum {
 	 * 时间复杂度：O(N)
 	 * 空间复杂度：O(N)
 	 */
-	public static int[] twoSum2(int[] nums, int target) {
+	public int[] twoSum2(int[] nums, int target) {
+		if (nums == null || nums.length == 0) {
+			return null;
+		}
 		Map<Integer, Integer> map = new HashMap<>();
 		int len = nums.length;
 		for(int i = 0; i < len; i++) {
@@ -67,7 +73,10 @@ public class TwoSum {
 	 * 时间复杂度：O(N)
 	 * 空间复杂度：O(N)
 	 */
-	public static int[] twoSum3(int[] nums, int target) {
+	public int[] twoSum3(int[] nums, int target) {
+		if (nums == null || nums.length == 0) {
+			return null;
+		}
 		Map<Integer, Integer> map = new HashMap<>();
 		for(int i = 0; i < nums.length; i++) { // <元素值, 索引位置>
 			int complement = target - nums[i];
@@ -76,12 +85,6 @@ public class TwoSum {
 			map.put(nums[i], i);
 		}
 		return null;
-	}
-
-	public static void main(String[] args) {
-		int[] nums = {3,3};
-		int[] res = twoSum3(nums,6);
-		System.out.println(res[0] + "," + res[1]);
 	}
 
 }

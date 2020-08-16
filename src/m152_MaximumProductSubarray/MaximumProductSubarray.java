@@ -23,7 +23,7 @@ public class MaximumProductSubarray {
         if (nums == null || nums.length == 0) {
             return 0;
         }
-        int max = Integer.MIN_VALUE;
+        int maxPro = Integer.MIN_VALUE;
         int curMax = 1;
         int curMin = 1;
         for (int i = 0; i < nums.length; i++) {
@@ -34,8 +34,8 @@ public class MaximumProductSubarray {
             }
             curMax = Math.max(nums[i], curMax * nums[i]);
             curMin = Math.min(nums[i], curMin * nums[i]);
-            max = Math.max(curMax, max);
+            maxPro = Math.max(curMax, maxPro);
         }
-        return max;
+        return maxPro;
     }
 }

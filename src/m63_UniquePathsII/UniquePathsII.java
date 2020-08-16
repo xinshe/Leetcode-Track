@@ -24,6 +24,7 @@ package m63_UniquePathsII;
  * 1. 向右 -> 向右 -> 向下 -> 向下
  * 2. 向下 -> 向下 -> 向右 -> 向右
  *
+ * 题目链接：https://leetcode-cn.com/problems/unique-paths-ii/
  */
 public class UniquePathsII {
 
@@ -54,7 +55,7 @@ public class UniquePathsII {
     }
 
     /**
-     * 解法1：DP（不需要额外空间，在原数组上进行修改）
+     * 解法2：DP（不需要额外空间，在原数组上进行修改）
      */
     public int uniquePathsWithObstacles2(int[][] obstacleGrid) {
         if (obstacleGrid == null || obstacleGrid.length == 0 || obstacleGrid[0].length == 0) return 0;
@@ -76,5 +77,36 @@ public class UniquePathsII {
             }
         }
         return obstacleGrid[m - 1][n - 1];
+    }
+
+    /**
+     * 二维数组dp
+     */
+    public int uniquePathsWithObstacles3(int[][] obstacleGrid) {
+        int m, n;
+        if (obstacleGrid == null || (m = obstacleGrid.length) == 0 || (n = obstacleGrid[0].length) == 0) return 0;
+        int[][] dp = new int[m][n];
+        boolean flag = false;
+        if (obstacleGrid[0][0] == 1) return 0;
+        else {
+            dp[0][0] = 1;
+        }
+        for (int i = 1; i < m; i++) {
+            if (obstacleGrid[i][0] == 1) flag = true;
+            dp[i][0] = flag ? 0 : 1;
+        }
+        flag = false;
+        for (int i = 1; i < n; i++) {
+            if (obstacleGrid[0][i] == 1) flag = true;
+            dp[0][i] = flag ? 0 : 1;
+        }
+
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                if (obstacleGrid[i][j] == 1) dp[i][j] = 0;
+                else dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+            }
+        }
+        return dp[m - 1][n - 1];
     }
 }

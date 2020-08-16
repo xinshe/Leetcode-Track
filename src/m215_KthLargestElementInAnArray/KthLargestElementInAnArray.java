@@ -19,6 +19,8 @@ import java.util.PriorityQueue;
  * 说明:
  * 你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。
  *
+ * 题目链接：https://leetcode-cn.com/problems/kth-largest-element-in-an-array/
+ *
  */
 public class KthLargestElementInAnArray {
 
@@ -27,7 +29,7 @@ public class KthLargestElementInAnArray {
      * 时间复杂度：O(NlogK)
      * 空间复杂度：O(K)
      */
-    public static int findKthLargest(int[] nums, int k) {
+    public int findKthLargest(int[] nums, int k) {
         int[] minHeap = new int[k];
         int len = nums.length;
         for (int i = 0; i < k; i++) {
@@ -45,7 +47,7 @@ public class KthLargestElementInAnArray {
         return minHeap[0];
     }
 
-    private static void shiftDown(int[] minHeap, int i, int k) {
+    private void shiftDown(int[] minHeap, int i, int k) {
         // 这个方法还可以做优化：就是不用每次都做交换，记住索引，最后交换一次即可
         while (2*i+1 < k) {
             int j = 2*i+1; // 节点i的左子节点为j=2*i+1
@@ -70,7 +72,7 @@ public class KthLargestElementInAnArray {
      * 时间复杂度 O(NlogK)
      * 空间复杂度 O(K)
      */
-    public static int findKthLargest03(int[] nums, int k) {
+    public int findKthLargest03(int[] nums, int k) {
         PriorityQueue<Integer> pq = new PriorityQueue(); // 小顶堆
         for (int val : nums) {
             pq.add(val);
@@ -86,7 +88,7 @@ public class KthLargestElementInAnArray {
      * 时间复杂度 O(NlogN)
      * 空间复杂度 O(1)
      */
-    public static int findKthLargest02(int[] nums, int k) {
+    public int findKthLargest02(int[] nums, int k) {
         Arrays.sort(nums);
         return nums[nums.length-k];
     }
@@ -98,7 +100,7 @@ public class KthLargestElementInAnArray {
      * 快速排序参考资料：https://blog.csdn.net/morewindows/article/details/6684558
      * 快速选择思想，时间复杂度分析：https://blog.csdn.net/Yaokai_AssultMaster/article/details/68878950
      */
-    public static int findKthLargest04(int[] nums, int k) {
+    public int findKthLargest04(int[] nums, int k) {
         int left = 0;
         int right = nums.length - 1;
         k = nums.length - k;    // 排序一般是从小到大进行排序，第k大的应该是倒数第k个
@@ -116,7 +118,7 @@ public class KthLargestElementInAnArray {
      * 这里left<right要不要取等号，考虑一下！
      * 另外与nums[pivot]相等的元素放到哪一边，考虑一下！
      */
-    private static int partition(int[] nums, int left, int right) {
+    private int partition(int[] nums, int left, int right) {
         int pivot = left;
         int tmp;
         while (left < right) {  // 这里不取等号
@@ -137,7 +139,7 @@ public class KthLargestElementInAnArray {
      * 一趟快排的另一种实现（通用写法）
      * 如果取的flag是最左边的元素，那么就要从最右边开始遍历；反之。
      */
-    private static int partition02(int[] nums, int left, int right) {
+    private int partition02(int[] nums, int left, int right) {
         int flag = nums[left];
         while (left < right) {
             while (left < right && nums[right] >= flag)  right--;
@@ -149,9 +151,4 @@ public class KthLargestElementInAnArray {
         return left;
     }
 
-    public static void main(String[] args) {
-//        int[] a = new int[]{3,2,3,1,2,4,5,5,6,7,7,8,2,3,1,1,1,10,11,5,6,2,4,7,8,5,6}; // 20:2
-        int[] a = new int[]{5,2,4,1,3,6,0}; // 4:3
-        System.out.println(findKthLargest04(a, 4));
-    }
 }
