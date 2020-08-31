@@ -1,59 +1,70 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 
 class ShareResource {
-    String numbers;
-    String strings;
-    private boolean flag;
-    private int index1 = 0;
-    private int index2 = 0;
+    Lock lock = new ReentrantLock();
+    Condition c1 = lock.newCondition();
+    Condition c2 = lock.newCondition();
+    Condition c3 = lock.newCondition();
+    char flag = 'a';
 
-    public ShareResource(String numbers, String strings) {
-        this.numbers = numbers;
-        this.strings = strings;
+    public void printA() throws InterruptedException {
+        lock.lock();
+
+        while (flag != 'a') {
+            c1.await();
+        }
+
+        System.out.println(flag);
+        flag = 'b';
+        c2.signal();
+
+        lock.unlock();
     }
 
-    public void printNumber() throws InterruptedException {
-        synchronized (this) {
-           while (flag) {
-               this.wait();
-           }
-           if (index1 < numbers.length()) {
-               System.out.println(numbers.charAt(index1++));
-           }
-           flag = !flag;
-           this.notify();
+    public void printB() throws InterruptedException {
+        lock.lock();
+
+        while (flag != 'b') {
+            c2.await();
         }
+
+        System.out.println(flag);
+        flag = 'c';
+        c3.signal();
+
+        lock.unlock();
     }
 
-    public void printString() throws InterruptedException {
-        synchronized (this) {
-            while (!flag) {
-                this.wait();
-            }
-            if (index2 < strings.length()) {
-                System.out.println(numbers.charAt(index2++));
-            }
-            flag = !flag;
-            this.notify();
+    public void printC() throws InterruptedException {
+        lock.lock();
+
+        while (flag != 'c') {
+            c3.await();
         }
+
+        System.out.println(flag);
+        flag = 'a';
+        c1.signal();
+
+        lock.unlock();
     }
 
 }
 
 public class Main {
 
-    static int n1 = 9;
-    static int n2 = 5;
-
     public static void main(String[] args) {
-        ShareResource sr = new ShareResource("123456789", "ABCDE");
-//        n1 = sr.numbers.length();
-//        n2 = sr.strings.length();
+        ShareResource shareResource = new ShareResource();
 
         new Thread(() -> {
-            while (n1-- > 0) {
+            while (true) {
                 try {
-                    sr.printNumber();
+                    shareResource.printA();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -61,13 +72,25 @@ public class Main {
         }).start();
 
         new Thread(() -> {
-            while (n2-- > 0) {
+            while (true) {
                 try {
-                    sr.printNumber();
+                    shareResource.printB();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+
+        new Thread(() -> {
+            while (true) {
+                try {
+                    shareResource.printC();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }).start();
     }
+
 }
