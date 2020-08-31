@@ -1,8 +1,8 @@
 package e7_ReverseInteger;
 
 /**
- * ÌâÄ¿ÃèÊö£º
- * https://leetcode.com/problems/reverse-integer/description/
+ *
+ * é¢˜ç›®é“¾æ¥ï¼šhttps://leetcode.com/problems/reverse-integer/description/
  */
 
 public class ReverseInteger {
